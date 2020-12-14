@@ -22,6 +22,8 @@ function computerPlay() {
 
 function playRound(playerSelection, computerSelection) {
     // Convert playerSelection into lowercase
+    playerSelection = playerSelection.toLowerCase();
+
     switch(true) {
         // IF playerSelection and computerSelection have same value, then it's a tie
         case playerSelection === computerSelection: return "tie";
@@ -63,14 +65,16 @@ function calculateScore(playerScore, computerScore) {
 }
 
 // Create a function for player selection button
-
-
-function playerSel() {
+function playerSel(sel, callback) {
     //IF button with "rock" value selected, then return "rock"
-    
-    playerSel_rock.onclick = function() {
-        if (documen)
+    if (sel == undefined) {
+        setTimeout(callback, 5000);
+        playerSel();
     }
+    else {
+        playRound(sel, computerPlay());
+    }
+
 }
 
 // Create a function of the game itself
@@ -87,13 +91,15 @@ function game(rounds) {
     for (i = 1; i <= rounds; i++) {
         // Print the round
         console.log("Round ", i);
+        // Run playRound function
+        let winner = playerSel();
         // Prompt player for a input
-        console.log("Player player: ", playerSelection);
+        console.log("Player played: ", playerSelection);
         // Generate computer choice
         let computerSelection = computerPlay();
         console.log("Computer played: ", computerSelection);
-        // Run playRound function
-        let winner = playRound(playerSelection, computerSelection);
+        
+        
         // Add score using IF statement
         if (winner === "player") {
             console.log("Player Wins");
