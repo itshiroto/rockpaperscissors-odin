@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+        <meta charset="UTF-8"/>
+        
+    </head>
+    <body>
+        <div class="startpage" hidden>
+            <input 
+                type="number"
+                id="gameRounds"
+                name="gameRounds"
+                min="1"></input>
+            <button
+                type="button"
+                name="gameStart" 
+                id="gameStart"
+                onclick="game()">Start</button>
+        </div>
+        <div>
+            <button
+            type="button"
+            name="playerSel-rock" 
+            id="playerSel-rock"
+            value="rock">Rock</button>
+
+            <button
+            type="button"
+            name="playerSel-paper" 
+            id="playerSel-paper"
+            value="paper">Paper</button>
+
+            <button
+            type="button"
+            name="playerSel-scissors" 
+            id="playerSel-scissors"
+            value="scissors">Scissors</button>
+        </div>
+        <script src="playGame-rev1.js"></script>
+    </body>
+</html>
