@@ -2,10 +2,24 @@
     <head>
         <title>Rock Paper Scissors</title>
         <meta charset="UTF-8"/>
+        <style>
+            #gameMsg {
+                width: 500px;
+                height: 100px;
+                border: 1px solid #888;
+                overflow: auto;
+            }
+            
+            #gameMsg > p {
+                line-height: 0;
+                font-family: 'Courier New', monospace;
+                font-size: 14px;
+            }
+        </style>
         
     </head>
     <body>
-        <div class="startpage" hidden>
+        <div id="game-startbtn">
             <input 
                 type="number"
                 id="gameRounds"
@@ -15,9 +29,11 @@
                 type="button"
                 name="gameStart" 
                 id="gameStart"
-                onclick="game()">Start</button>
+                onclick="startGame()">Start</button>
         </div>
-        <div>
+       <div id="gameMsg">
+       </div>
+        <div id="game-mainbtn">
             <button
             type="button"
             name="playerSel-rock" 
