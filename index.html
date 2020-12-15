@@ -2,42 +2,90 @@
     <head>
         <title>Rock Paper Scissors</title>
         <meta charset="UTF-8"/>
-        <script src="rockpaperscissors.js"></script>
+        <link rel="stylesheet" href="style.css">
+        
     </head>
     <body>
-        <div class="startpage">
-            <input 
-                type="number"
-                id="gameRounds"
-                name="gameRounds"
-                min="1"></input>
-            <button
-                type="button"
-                name="gameStart" 
-                id="gameStart"
-                onclick="game()">Start</button>
-        </div>
-        <div>
-            <button
-            type="button"
-            name="playerSel-rock" 
-            id="playerSel-rock"
-            value="rock"
-            onclick="playerSel('rock')">Rock</button>
+        <div id="page-wrapper">
+            <div class="container centered">
+            <div class="main-content">
+                <section id="game-status">
+                    <div class="scores" id="player-status">
+                        <p class="scoretitle">Player</p>
+                        <p class="scorenum">Score: <span id="player-score">0</span></p>
+                    </div>
 
-            <button
-            type="button"
-            name="playerSel-paper" 
-            id="playerSel-paper"
-            value="paper"
-            onclick="playerSel('paper')">Paper</button>
+                    <div id="title-status"><p id="title-statustxt"></p></div>
 
-            <button
-            type="button"
-            name="playerSel-scissors" 
-            id="playerSel-scissors"
-            value="scissors"
-            onclick="playerSel('scissors')">Scissors</button>
+                    <div class="scores" id="comp-status">
+                        <p class="scoretitle">Computer</p>
+                        <p class="scorenum">Score: <span id="comp-score">0</span></p>
+                    </div>
+
+                </section>
+                <section id='game-container'>
+                <div class="game-button" id="game-mainbtn">
+                    
+                    <button
+                    type="button"
+                    name="playerSel-rock" 
+                    id="playerSel-rock"
+                    value="rock">Rock</button>
+
+                    <button
+                    type="button"
+                    name="playerSel-paper" 
+                    id="playerSel-paper"
+                    value="paper">Paper</button>
+
+                    <button
+                    type="button"
+                    name="playerSel-scissors" 
+                    id="playerSel-scissors"
+                    value="scissors">Scissors</button>
+                </div>
+                <div id="gameMsg"></div>
+                <div class="game-button" id="game-compbtn">
+                    
+                    <button
+                    type="button"
+                    name="compSel-rock" 
+                    id="compSel-rock"
+                    value="rock"
+                    disabled>Rock</button>
+
+                    <button
+                    type="button"
+                    name="compSel-paper" 
+                    id="compSel-paper"
+                    value="paper"
+                    disabled>Paper</button>
+
+                    <button
+                    type="button"
+                    name="compSel-scissors" 
+                    id="compSel-scissors"
+                    value="scissors"
+                    disabled>Scissors</button>
+                </div>
+                </section>
+                <section id="game-startbtn">
+                <input 
+                    type="number"
+                    id="gameRounds"
+                    name="gameRounds"
+                    min="1"
+                    placeholder="Rounds (1-100)"
+                    required></input>
+                <button
+                    type="submit"
+                    name="gameStart" 
+                    id="gameStart"
+                    onclick="startGame()">Start Game!</button>
+                </section>
+            </div>
+            </div>
         </div>
+        <script src="playGame-rev1.js"></script>
     </body>
 </html>
