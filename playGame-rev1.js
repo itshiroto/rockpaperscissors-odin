@@ -10,19 +10,32 @@ let computerScore = 0;
 const btnStart = document.getElementById('gameStart');
 const inptRounds = document.getElementById('gameRounds');
 
+// Defining player and computer score <span> element
+const pViewScore = document.getElementById('player-score');
+const cViewScore = document.getElementById('comp-score');
+
+// Defining title-statustxt
+const titleStatus = document.getElementById('title-statustxt');
 
 // Defining player buttons
 const playerRock = document.getElementById('playerSel-rock');
 const playerPaper = document.getElementById('playerSel-paper') ;
 const playerScissors = document.getElementById('playerSel-scissors');
 
+// Defining computer buttons
+const compRock = document.getElementById('compSel-rock');
+const compPaper = document.getElementById('compSel-paper') ;
+const compScissors = document.getElementById('compSel-scissors');
+
 // Check if user click the button, then execute the mentioned function
 playerRock.addEventListener("click", () => playRound('rock') );
 playerPaper.addEventListener("click", () => playRound('paper'));
 playerScissors.addEventListener("click", () => playRound('scissors'));    
 
-document.querySelector("body").onload = () => disableButtons();
+// Execute disableButtons() and change titlestatus when page loaded
+document.querySelector("body").onload = () => disableButtons(); titleStatus.innerHTML = `Hiroto's Rock Paper Scissors`;
 
+// Disable the buttons
 function disableButtons() {
     btnStart.disabled = false;
     inptRounds.disabled = false;
@@ -32,29 +45,66 @@ function disableButtons() {
     playerScissors.disabled = true
 }
 
+// Start game function, all desribed below
 function startGame() {
+    // Change rounds value
+    currentRounds = 0;
     maxRounds = document.getElementById('gameRounds').value;
+
+    // Disabling unused buttons
     btnStart.disabled = true;
     inptRounds.disabled = true;
     
+    // Enabling the main buttons
     playerRock.disabled = false;
     playerPaper.disabled = false;
     playerScissors.disabled = false;
 
+    // Change title status into current round number
+    titleStatus.innerHTML = `Round ${currentRounds + 1}`;
+
+    // Delete all message in textbox and console
     clearMsg();
     console.clear();
 
 }
+
 // Create a function called computerPlay to make a bot (literally)
 function computerPlay() {
     // Create a switch condition with random number generator on it's expression
     switch (Math.floor(Math.random() * 3) + 1) {
     // IF play = 1 then return "Rock"
-    case 1: return "rock";
+    case 1: {
+        colorBtn("rock")
+        return "rock"; 
+    }
     // ELIF play = 2 then return "Paper"
-    case 2: return "paper";
+    case 2: {
+        colorBtn("paper")
+        return "paper"; 
+    }
     // ELIF play = 3 then return "Scissors"
-    case 3: return "scissors";
+    case 3: {
+        colorBtn("scissors")
+        return "scissors"; 
+    }
+    }
+}
+
+// Change color of the computerbtn
+function colorBtn(choice) {
+    // Declare the default color for the button
+    let defaultColor =  "rgba(19, 1, 1, 0.3)";
+    compRock.style.background = defaultColor;
+    compPaper.style.background = defaultColor;
+    compScissors.style.background = defaultColor;
+
+    /// Use switch condition for changing the color of the buttons
+    switch(choice) {
+        case "rock": compRock.style.background = "RGB(255,206,206)"; break;
+        case "paper": compPaper.style.background = "RGB(255,206,206)"; break;
+        case "scissors": compScissors.style.background = "RGB(255,206,206)"; break;
+        default: break;
     }
 }
 
@@ -67,6 +117,7 @@ function playRound(playerSelection) {
     currentRounds++;
     console.log("Round ", currentRounds);
     updateMsg(`Round ${currentRounds}`);
+    titleStatus.innerHTML = `Round ${currentRounds + 1}`;
 
     // Play the bot
     let computerSelection = computerPlay();
@@ -107,23 +158,36 @@ function playRound(playerSelection) {
     // Line break
     console.log("---")
     updateMsg("---")
-    checkFinished();
+    
+    // Check if the game finished or not
+    checkFinished(winner);
 }
 
-// Update message in Textbox so we can play in HTML instead of console.log
+// Update message in textbox so we can play in browser directly instead in javascript console
 function updateMsg(msg, param1){
+
+    // Update score on pViewScore and cViewScore
+    pViewScore.innerHTML = playerScore;
+    cViewScore.innerHTML = computerScore;
+
+    // Create new para element
     let para = document.createElement("p");
+
+    // Change font weight if param1 value exist
     if (param1) {
         para.style.fontWeight = param1;
     }
+    // Write the text itself
     let node = document.createTextNode(msg);
     para.appendChild(node);
-
+    // Add it to gameMsg div
     let element = document.getElementById("gameMsg");
     element.appendChild(para);
+    // Scroll Down
     updateScroll();
 }
 
+// Clear message in textbox if executed (thank you stackoverflow)
 function clearMsg() {
     const myNode = document.getElementById("gameMsg");
     while (myNode.firstChild) {
@@ -131,22 +195,21 @@ function clearMsg() {
     }
 }
 
-// For auto scrolling to bottom of the div
+// For auto scrolling to bottom of the div (thank you stackoverflow)
 function updateScroll(){
     let element = document.getElementById("gameMsg");
     element.scrollTop = element.scrollHeight;
 }
 
-function checkFinished() {
+// Simple function to ask if the game was finished
+function checkFinished(callback) {
     if (currentRounds == maxRounds) {
-        winner();
+        callback();
     }
 }
 
 // Announce the winner
 function winner() {
-    console.log("winner() function is executed!")
-
     // Report the score in console
     console.log("Player scored ", playerScore, " point(s)");
     console.log("Computer score ", computerScore, " point(s)");
@@ -157,19 +220,25 @@ function winner() {
 
     // Determine the winner
     switch (calculateScore(playerScore, computerScore)) {
+        // if player wins
         case "player": {
             console.log("Player Wins!");
-            updateMsg(`Player Wins!`, "bold")
+            updateMsg(`Player wins the game!`, "bold")
+            titleStatus.innerHTML = `Player Wins!`;
             break; 
         }
+        // if computer wins
         case "computer": {
             console.log("Computer Wins!");
-            updateMsg(`Computer Wins!`, "bold")
+            updateMsg(`Computer wins the game!`, "bold")
+            titleStatus.innerHTML = `Computer Wins!`;
             break; 
         }
+        // if ties
         case "tie": {
             console.log("It's a Tie!");
             updateMsg(`It's a Tie!`, "bold")
+            titleStatus.innerHTML = `It's a Tie!`;
             break; 
         }
         default: console.log("Something wrong"); break;
