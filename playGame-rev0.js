@@ -1,3 +1,9 @@
+/* THIS IS THE OLD CODE THAT I USE TO CREATE THIS GAME
+   This code only can be executed and played on Javascript Console.
+   I highly suggest you to use the rev1 one. */
+
+
+
 // Defining player buttons
 const playerRock = document.querySelector("#playerSel-rock");
 const playerPaper = document.querySelector('#playerSel-paper') ;
