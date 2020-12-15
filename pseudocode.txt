@@ -1,0 +1,30 @@
+User plays the game
+Sediakan 3 tombol, semuanya ketika diklik menjalankan function playRound(value)
+IF playRound jalan, THEN {
+    variable currentRounds ditambah 1
+    bacakan ronde ke berapa
+    jalankan bot komputer
+    jalankan switch statement (already done)
+    {
+        tambah skor ke pemenang
+    }
+    jalankan fungsi checkFinished
+}
+
+function checkFinished()
+IF currentRounds == maxRounds, THEN {
+    jalankan function winner()
+} ELSE {
+    break
+}
+
+function winner() 
+
+
+
+
+
+
+
+
+
